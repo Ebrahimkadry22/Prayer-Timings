@@ -57,6 +57,7 @@ document.getElementById('cities').addEventListener('change', function () {
   getApi(cityName)
 })
 
+let loader = document.getElementById('loader')
 
 function getApi (city) {
   let params = {
@@ -68,7 +69,7 @@ function getApi (city) {
   })
     .then(function (response) {
       // handle success
-      console.log(response.data.data.timings);
+      // console.log(response.data.data.timings);
       let timings = response.data.data.timings;
       document.getElementById('cards').innerHTML = "";
       for (let paryer of paryerTime) {
@@ -96,10 +97,12 @@ function getApi (city) {
       const readableWeekday = response.data.data.date.hijri.weekday.ar;
       const date = readableWeekday + "  " + readableDay + "  " + readableMonth + "  " + readableYear;
       document.getElementById('date').innerHTML = date
+      loader.style.display = 'none';
     })
     .catch(function (error) {
       // handle error
-      console.log(error);
+      // console.log(error);
+      loader.style.display = 'block';
     })
 }
 
